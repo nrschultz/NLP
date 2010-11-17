@@ -1,4 +1,7 @@
 def main():
+  createParseDict()
+
+def createParseDict():
   f = open('subjclueslen1-HLTEMNLP05.tff','r')
   dt = {}
   for line in f:
@@ -6,16 +9,16 @@ def main():
     s = line[2].split('=')[1]
     pol = ''
     if line[5].split('=')[1] == 'positive':
-      pol = '+'
+      pol = 1
     else:
-      pol = '-'
+      pol = -1
     strength = ''
     if line[0].split('=')[1] == 'strongsubj':
-      strength = 'strong'
+      strength = 2
     else:
-      strength = 'weak'
-    dt[s] = (pol,strength)
-  print dt
+      strength = 1
+    dt[s] = pol*strength
+  return dt
 
 
 
