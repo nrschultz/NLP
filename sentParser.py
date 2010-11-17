@@ -20,6 +20,13 @@ def createParseDict():
     dt[s] = pol*strength
   return dt
 
+def createSimpDict():
+  f = open('sentmtListsm.txt','r')
+  dt = {}
+  for line in f:
+    line = line.split()
+    dt[line[0]] = int(line[1])
+  return dt
 
 
 
