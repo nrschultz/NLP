@@ -1,0 +1,33 @@
+good 2
+great 3
+awesome 3
+fine 1
+ok 1
+decent 1
+super 3
+wonderful 3
+easy 1
+useful 2
+nice 2
+positive 2
+
+
+
+
+bad -2
+sucks -3
+stinks -2
+horrible -3
+shit -3
+annoying -2
+annoys -2
+evil -3
+unpleasant -2
+impossible -3
+negative -2
+nefarious -3
+hard -1
+fuck -2
+fucking -2
+
+
