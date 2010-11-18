@@ -25,6 +25,7 @@ def tweetParser(filename, parser):
   return tweetWordDict, pdict
 
 def improvePD(twd, pd):
+  improvedic={}
   for key in twd.keys():
     sent_val = 0.0
     #print twd[key]['count']
@@ -32,7 +33,27 @@ def improvePD(twd, pd):
       sent_val = float(twd[key]['total_sent'])/float(twd[key]['count'])
       #print sent_val
     if abs(sent_val) > 1 and twd[key]['count'] > 200:
-      print key, sent_val
+      improvedic[key]= sent_val
+      findKey(key,pd)
+
+
+def findKey(key,pd):
+  keythere=0
+  for word in pd:
+    if key==word:
+      keythere=1
+  if keythere==1:
+    return True
+  else:
+    print "New sentmt word found", key, "\n"
+    return False
+   
+
+
+
+
+    
+  
 
 
 def main():
