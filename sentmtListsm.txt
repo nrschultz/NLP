@@ -3,6 +3,7 @@ great 3
 awesome 3
 fine 1
 ok 1
+cool 2
 decent 1
 super 3
 wonderful 3
