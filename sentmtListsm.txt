@@ -10,10 +10,6 @@ easy 1
 useful 2
 nice 2
 positive 2
-
-
-
-
 bad -2
 sucks -3
 stinks -2
