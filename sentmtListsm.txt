@@ -3,6 +3,7 @@ great 3
 awesome 3
 fine 1
 ok 1
+cool 2
 decent 1
 super 3
 wonderful 3
@@ -10,10 +11,8 @@ easy 1
 useful 2
 nice 2
 positive 2
-
-
-
-
+fast -2
+slow -2
 bad -2
 sucks -3
 stinks -2
