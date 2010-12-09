@@ -29,6 +29,7 @@ def tweetParser(filename, parser):
     total_score += total_tweet_score
   return tweetWordDict, pdict, numTweets, total_score
 
+
 def improvePD(twd, pd, threshold, avg):
   size_pd = len(pd)
   for key in twd.keys():
@@ -43,6 +44,26 @@ def improvePD(twd, pd, threshold, avg):
   print len(pd)
       #print key, sent_val
 
+
+
+def findKey(key,pd):
+  keythere=0
+  for word in pd:
+    if key==word:
+      keythere=1
+  if keythere==1:
+    return True
+  else:
+    print "New sentmt word found", key, "\n"
+    return False
+   
+
+
+
+
+    
+  
+>>>>>>> c7f0e3a561f308a7b04e3e185233157594c45508
 
 def main(tweetRatio):
   pd = {}
