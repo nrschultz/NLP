@@ -46,24 +46,6 @@ def improvePD(twd, pd, threshold, avg):
 
 
 
-def findKey(key,pd):
-  keythere=0
-  for word in pd:
-    if key==word:
-      keythere=1
-  if keythere==1:
-    return True
-  else:
-    print "New sentmt word found", key, "\n"
-    return False
-   
-
-
-
-
-    
-  
->>>>>>> c7f0e3a561f308a7b04e3e185233157594c45508
 
 def main(tweetRatio):
   pd = {}
