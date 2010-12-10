@@ -82,7 +82,12 @@ def improvePD(twd, pd, threshold, avg):
   print len(pd)
       #print key, sent_val
 
+<<<<<<< HEAD
 #def mention Weight():
+=======
+
+
+>>>>>>> 079546d567142ff0388bdab422f474c21994c223
 
 def main(tweetRatio):
   pd = {}
