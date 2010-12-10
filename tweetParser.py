@@ -29,6 +29,44 @@ def tweetParser(filename, parser):
     total_score += total_tweet_score
   return tweetWordDict, pdict, numTweets, total_score
 
+def tweetParserNeg(filename, parser):
+  f = open(filename,'r')
+  pdict = parser
+  tweetWordDict = {}
+  numTweets = 0
+  total_score = 0
+  for line in f:
+    numTweets += 1
+    line = line.strip()
+    line = line.split()
+    negDict={}
+    i=0
+    total_tweet_score = 0
+    for word in line:
+      word = word.rstrip('.')
+      negDict[i]=word
+      #if word == 'good':
+        #for word in line:
+          #print word , pdict.get(word,0)
+      if i>2:
+        if negDict.get(i-2)=='not' or negDict.get(i-1)=='not':
+          total_tweet_score-=pdict.get(word.lower(),0)
+        else:
+          total_tweet_score += pdict.get(word.lower(),0)
+      else:
+        total_tweet_score+=pdict.get(word.lower(),0)
+      i+=1
+    for word in line:
+      word = word.rstrip('.')
+      word = word.lower()
+      wordEntry = tweetWordDict.get(word, {'count':0, 'total_sent':0})
+      wordEntry['count'] += 1
+      wordEntry['total_sent'] += total_tweet_score
+      tweetWordDict[word] = wordEntry
+    total_score += total_tweet_score
+  return tweetWordDict, pdict, numTweets, total_score
+
+
 
 def improvePD(twd, pd, threshold, avg):
   size_pd = len(pd)
@@ -44,34 +82,15 @@ def improvePD(twd, pd, threshold, avg):
   print len(pd)
       #print key, sent_val
 
-
-
-def findKey(key,pd):
-  keythere=0
-  for word in pd:
-    if key==word:
-      keythere=1
-  if keythere==1:
-    return True
-  else:
-    print "New sentmt word found", key, "\n"
-    return False
-   
-
-
-
-
-    
-  
->>>>>>> c7f0e3a561f308a7b04e3e185233157594c45508
+#def mention Weight():
 
 def main(tweetRatio):
   pd = {}
   for i in range(1,11):
     if i == 1:
-      twd, pd, numTweets, total_score = tweetParser('/scratch/nschult1/prunedTweets.txt', sentParser.createSimpDict())
+      twd, pd, numTweets, total_score = tweetParserNeg('testtweets.txt', sentParser.createSimpDict())
     else:
-      twd, pd, numTweets, total_score = tweetParser('/scratch/nschult1/prunedTweets.txt', pd)
+      twd, pd, numTweets, total_score = tweetParserNeg('testtweets.txt', pd)
     print numTweets, total_score
     avg = (float(total_score)/float(numTweets))
     threshold = ((numTweets*tweetRatio))
@@ -86,4 +105,4 @@ if __name__ == '__main__': main(float(sys.argv[1]))
 
 
 
-      
+    
