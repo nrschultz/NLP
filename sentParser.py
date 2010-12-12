@@ -21,11 +21,19 @@ def createParseDict():
   return dt
 
 def createSimpDict():
-  f = open('sentmtListsm.txt','r')
+  f = open('sentmtListsm.txt', 'r')
   dt = {}
   for line in f:
     line = line.split()
     dt[line[0]] = int(line[1])
+  return dt
+
+def createEDict():
+  f=open('sentEnhancers.txt', 'r')
+  dt={}
+  for line in f:
+    line=line.split()
+    dt[line[0]]=float(line[1])
   return dt
 
 
