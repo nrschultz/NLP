@@ -20,8 +20,13 @@ def createParseDict():
     dt[s] = pol*strength
   return dt
 
+<<<<<<< HEAD
 def createSimpDict(txt):
   f = open(txt, 'r')
+=======
+def createSimpDict(fname):
+  f = open(fname, 'r')
+>>>>>>> 3c29d345d3c85f838c31cadec81f5a68f23538ee
   dt = {}
   for line in f:
     line = line.split()
