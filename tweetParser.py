@@ -1,5 +1,6 @@
 import sentParser
 import sys
+import re
 
 
 def tweetParser(filename, parser):
@@ -8,18 +9,28 @@ def tweetParser(filename, parser):
   tweetWordDict = {}
   numTweets = 0
   total_score = 0
-  for line in f:
+  urlRE = re.compile('\shttp([^\s]*)')
+  puncRE = re.compile(r'([^\w\s]+)\s+') 
+
+  for tweet in f:
     numTweets += 1
-    line = line.strip()
-    line = line.split()
+    tweet = tweet.strip()
+    m = puncRE.findall(tweet)
+    patt_d = {}
+    for patt in m:
+      patt_d[patt] = 1
+    for patt in patt_d:
+      tweet = tweet.replace(patt, ' %s' %patt)
+    tweet_w_list = tweet.split()
     total_tweet_score = 0
-    for word in line:
-      word = word.rstrip('.')
+
+    for word in tweet_w_list:
+
       #if word == 'good':
         #for word in line:
           #print word , pdict.get(word,0)
       total_tweet_score += pdict.get(word.lower(),0)
-    for word in line:
+    for word in tweet_w_list:
       word = word.rstrip('.')
       word = word.lower()
       wordEntry = tweetWordDict.get(word, {'count':0, 'total_sent':0})
@@ -27,7 +38,7 @@ def tweetParser(filename, parser):
       wordEntry['total_sent'] += total_tweet_score
       tweetWordDict[word] = wordEntry
     total_score += total_tweet_score
-  return tweetWordDict, pdict, numTweets, total_score
+  return tweetWordDict, numTweets, total_score
 
 def tweetParserNeg(filename, parser):
   f = open(filename,'r')
@@ -127,33 +138,30 @@ def improvePD(twd, pd, threshold, avg):
     sent_val = 0.0
     #print twd[key]['count']
     if twd[key]['count'] != 0:
-      sent_val = float(twd[key]['total_sent'])/(avg * float(twd[key]['count']))
-      #print sent_val
-    if abs(sent_val) > 1 and twd[key]['count'] > threshold:
+      sent_val = float(twd[key]['total_sent'])/(abs(avg) * float(twd[key]['count']))
+    if abs(sent_val) > 1.5 and twd[key]['count'] > threshold:
       pd[key] = sent_val
       #print pd
-  print len(pd)
-      #print key, sent_val
+  #print len(pd)
+  return pd
 
 
 
 
 
 def main(tweetRatio):
-  pd = {}
-  enhancers=sentParser.createEDict()
-  for i in range(1,11):
-    if i == 1:
-      twd, pd, numTweets, total_score = tweetParser('testtweets.txt', sentParser.createSimpDict())
-      #twd, pd, numTweets, total_score = tweetParserNegE('testtweets.txt',  
-          #sentParser.createSimpDict(),enhancers)
-    else:
-      twd, pd, numTweets, total_score = tweetParser('testtweets.txt', pd)
-      #twd, pd, numTweets, total_score = tweetParserNegE('testtweets.txt', pd, enhancers)
-    print numTweets, total_score
+  pd = sentParser.createSimpDict('sentmtListsm.txt')
+
+  #pd = sentParser.createSimpDict('sentmtListsm.txt')
+  #enhancers=sentParser.createEDict()
+  for i in range(1,6):
+    twd, numTweets, total_score = tweetParser('/scratch/nschult1/prunedTweets.txt', pd)
     avg = (float(total_score)/float(numTweets))
+    print numTweets, total_score, avg
     threshold = ((numTweets*tweetRatio))
-    improvePD(twd,pd,threshold, avg)
+    #print pd
+    pd = improvePD(twd,pd,threshold, avg)
+    #print pd
   f = open('newparser.txt','w')
   for key in pd:
     f.write('%s %f\n' %(key,pd[key]))
