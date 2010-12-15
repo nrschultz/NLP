@@ -11,9 +11,10 @@ easy 1
 useful 2
 nice 2
 positive 2
-fast -2
+fast 2
 slow -2
 bad -2
+blows -3
 sucks -3
 stinks -2
 horrible -3
@@ -28,5 +29,3 @@ nefarious -3
 hard -1
 fuck -2
 fucking -2
-
-

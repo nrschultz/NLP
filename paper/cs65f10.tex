@@ -169,6 +169,63 @@ where negation is also found.
 
 \section{Related Work}
 
+\subsection{\cite{Yahoo!}}
+Yahoo! for Amazon:Sentiment Extraction from Small Talk on the Web attempts to
+use sentiment analysis algorithms to categorize the sentiment of analyst's post
+on stock message boards and they use this sentiment data to see if they can
+find relationships between the sentiment data and stock values.  Their goal is
+very similar to ours: to use sentiment analysis on a data set to predict
+company/stock performance, however our methods vary.  Das and Chen use a Naive
+Classifier, Vector Distance Classifier, Discriminant-Based Classifier,
+Adjective-Adverd Phrase Classifier, Bayesian Classifier, and Voting amongst
+Classifiers.  To examine the results of their classifiers the utilize four
+metrics: percentage classification accuracy, percentage of false positives,
+percentage error in aggregate sentiment, and a chi squared test of no
+classification ability.  Their methods ended up not predicting individual stock
+prices well, and they stretched to conclude they could predict index values.
+We expect the differences in data sets used between our experiments and their's
+could enhance the predictive abilities of our methods compared to the
+predictions they were capable of.
+
+\subsection{\cite{Written_Expression}}
+Dodds and Danforth use sentiment analysis on songs, blogs, and Presidential
+speeches.  They then draw conclusions from the sentiment data they have
+gathered to relate sentiment to things such as time period, location of person,
+and gender.  Again, a large difference is the data set we used compared to the
+data set they used.  However, we drew inspiration from the analysis they did on
+their methods and the conclusions they were capable of reaching from their
+sentiment analysis. 
+
+\subsection{\cite{Mixture}}
+The model described in Topic Sentiment Mixture: Modeling Facets and Opinions in
+Weblogs attempts to model the sentiment of weblogs.  A unique feature of their
+sentiment analyzer is they extract subtopics from the particular blog entry.
+Thus, if the blog entry is about the iPhone, their sentiment anlayzer may
+conclude positive sentiment for the iPhone but negative sentiment for the cost
+of the iPhone.  In this case, cost would be the subtopic.  This is somewhat
+related to what we conclude using our final list of sentiment words.  For
+example, if we see case has negative sentiment after running our sentiment
+anlayzer on tweets which the topic is iPhone, we know people have negative
+sentiment towards the cases of iPhones.  This is similar to the subtopic system
+used in their methods, but the implementation between our method and their
+method varies.  We also drew inspiration from the predictive capabilities of
+sentiment anlaysis that the authors speak of in their 'INTRODUCTION' section.
+
+\subsection{\cite{Tweets_to_Polls}}
+From Tweets to Polls, uses tweets from Twitter as a data set in an effort to
+score each tweet¿s sentiment.  They also start with a list of sentiment words
+which each have a positive or negative sentiment score.  To score each tweet
+they find sentiment words in the tweet then add up the sentiment score of each
+sentiment word found in that tweet.  If the resulting score is positive, the
+tweet is concluded to have positive sentiment, if the score is negative, the
+tweet has negative sentiment.  This is a fairly simple algorithm, considering
+it is fully supervised.  We used this paper as inspiration to use tweets as a
+data set.  It was also a good paper to start with since the implementation of
+sentiment analysis was very straight-forward.  We could easily build on their
+methods by using things such as negation, enhancers, and making our model
+semi-supervised.  
+
+
 \section{Evaluation}
 To evaluate our system, we created a gold standard.  To create the standard we
 hand-scored all of the words in 50 tweets with either a positive, negative or
@@ -198,6 +255,36 @@ improvement algorithm.  The values we tested on can be seen in table
 \section{Future Work}
 
 \section{Conclusions}
+The data set we used has potential to be quite predictive, while the analyst
+message on stock message boards data set used by Das and Chen and others was
+proven to not have much predictive value: "Antweiler and Frank (2004) examine
+the bullishness of messages and find that while web talk does not predict stock
+movements, it is predictive of volatility.  \cite{Yahoo!}"  This makes sense; the message
+boards could tell them how volatile the intraday trading would be, as analysts
+with differing opinion try to out muscle each other creating volatile markets,
+but not whether the stock would trend higher or lower, which is dependent on
+actual market revelations as opposed to analyst opinion.  How do our methods
+create possible predictive power?  First, we can look at tweet volume.  Then
+based on sentiment statistics of those tweets, we expect we can predict future
+volume changes based on current sentiment.  For example, if in one month iPhone
+has more tweet volume than blackberry, but worse overall tweet sentiment than
+blackberry, we would expect iPhone tweet volume to decrease at some point as
+more people bought blackberry's due to more satisfaction with that product.
+Obviously, this type of predictive capability could only be achieved after
+substantial analysis of sentiment data which contain evenly spread sentiment
+statistics of tweets over a period of time.  Comparing these statistics with
+actual product performance could let us use our data gathered to start
+predicting product performance.  Topic Sentiment Mixture: Modeling Facets and
+Opinion in Weblogs mentions the predictive power of sentiment analysis:
+"Although much work has been done recently on blog mining, most existing work
+aims at extracting and analyzing topical contents of bog articles without any
+analysis of sentiments in an article.  The lack of sentiment analysis in such
+work often limits the effectiveness of the mining results.  For example, [...]
+a burst of blog mentions about a book has been shown to be correlated with a
+spike of sales of the book in Amazon.com.  However, a burst of criticism of a
+book is unlikely to indicate a growth of the book sales.  Similarly a decrease
+of blog mentions about a product might actuallyt be caused by the decrease of
+complaints about its defects.  \cite{Mixture}"
 \bibliographystyle{cs65f10}
 \bibliography{cs65f10}
 

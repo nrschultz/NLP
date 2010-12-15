@@ -20,27 +20,18 @@ def createParseDict():
     dt[s] = pol*strength
   return dt
 
-
-def createSimpDict(fname, num_dicts):
+<<<<<<< HEAD
+def createSimpDict(txt):
+  f = open(txt, 'r')
+=======
+def createSimpDict(fname):
   f = open(fname, 'r')
-
-  if num_dicts == 1:
-    dt={}
-    for line in f:
-      line=line.split()
-      dt[line[0]]=float(line[1])
-    return dt
-  else:
-    p_dt = {}
-    n_dt = {}
-    for line in f:
-      line = line.split()
-      sent = float(line[1])
-      if sent > 0:
-        p_dt[line[0]] = sent
-      elif sent < 0:
-        n_dt[line[0]] = sent
-    return p_dt, n_dt
+>>>>>>> 3c29d345d3c85f838c31cadec81f5a68f23538ee
+  dt = {}
+  for line in f:
+    line = line.split()
+    dt[line[0]] = float(line[1])
+  return dt
 
 def createEDict():
   f=open('sentEnhancers.txt', 'r')
